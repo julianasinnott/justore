@@ -1,0 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #ffff;
+}
+
+header {
+  background-color: #164e45;
+  width: 100%;
+  position: fixed;
+  padding: 10px 80px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+#logo {
+  width: 180px;
+}
+
+.btn {
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  color: #ffff;
+  border: none;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  scale: 1.04;
+  transition: all 0.3s ease-in-out;
+  text-decoration: underline;
+  text-decoration-color: #c6e23b;
+  text-underline-offset: 4px;
+}
+
+#header_btn {
+  padding: 0 20px;
+  background-color: #2c9181;
+}
+
+main {
+  padding-top: 74px;
+}
+
+#main_banner {
+  display: flex;
+  gap: 20px;
+}
+
+.gradient_background {
+  padding: 40px 180px;
+  background: radial-gradient(circle, #2c9181 35%, #164e45 100%);
+}
+
+#main_banner_img {
+  max-width: 460px;
+  width: 100%;
+}
+
+#main_banner_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: #ffff;
+}
+
+#main_banner_title {
+  font-size: 50px;
+  font-weight: 500;
+}
+
+#main_banner_subtitle {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 300;
+}
+
+.neon {
+  color: #e0ff47;
+}
+
+#banner_btn {
+  background-color: #e0ff47;
+  color: #164e45;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+#banner_btn:hover {
+  background-color: #164e45;
+  color: #e0ff47;
+}
+
+#scientific_article {
+  display: flex;
+  justify-content: space-between;
+}
+
+#scientific_article_texts {
+  padding: 30px;
+  color: #0b2622;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#scientific_article_title {
+  font-size: 32px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+#scientific_article_subtitle {
+  font-size: 25px;
+  font-weight: 500;
+  color: #2c9181;
+}
+
+#scientific_article_image {
+  width: 100%;
+  background-image: url(https://puravive.com/assets/images/b1.jpg);
+  background-size: cover;
+  background-position-x: 50%;
+}
+
+#neon_under {
+  text-decoration: underline;
+  text-decoration-color: #c6e23b;
+  text-underline-offset: 4px;
+}
+
+#disclaimer {
+  padding: 20px 24px;
+  border-radius: 4px;
+  background-color: #2c91801e;
+}
+
+#scientific_article_references {
+  font-size: 12px;
+  color: #7d9390;
+}
+
+.order {
+  background-color: #164e45;
+  padding: 20px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.order_btn {
+  background-color: #2c9181;
+  padding: 10px 20px;
+}
+
+#guarantee {
+  padding: 30px 180px;
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+#guarantee_texts {
+  color: #0b2622;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: justify;
+  font-size: 24px;
+  gap: 10px;
+}
+
+#guarantee_texts_titles {
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #164e45;
+  text-align: center;
+}
+
+#scientific_references {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #7d9390;
+  font-size: 10px;
+}
+
+#scientific_references_title {
+  font-size: 16px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: #c6e23b;
+}
+
+#scientific_references_list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+
+#footer {
+  font-size: 16px;
+  color: #c1e3de;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#footer_links {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#terms_title,
+#privacy_title {
+  color: #164e45;
+  text-align: center;
+  padding: 40px;
+}
+
+#terms,
+#privacy {
+  color: #0b2622;
+  padding: 0 40px 40px;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

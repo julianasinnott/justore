@@ -1,0 +1,246 @@
+@media only screen and (max-width: 1170px) {
+  .gradient_background, #guarantee, header {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  #main_banner_img {
+    max-width: 380px;
+  }
+
+  #guarantee {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gradient_background, #guarantee, header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .order_btn {
+    padding: 30px 10px;
+  }
+}
+
+@media only screen and (max-width: 808px) {
+  #main_banner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #main_banner_img {
+    max-width: 460px;
+  }
+
+  #main_banner_text {
+    text-align: center;
+    line-height: 52px;
+    gap: 20px;
+  }
+
+  #banner_btn {
+    padding: 12px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  #main_banner_text {
+    gap: 10px;
+  }
+
+  #main_banner_title {
+    font-size: 42px;
+    line-height: 44px;
+  }
+
+  #order {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  #header_btn, .order_btn {
+    font-size: 23px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #main_banner_title {
+    font-size: 38px;
+    line-height: 40px;
+  }
+
+  #main_banner_subtitle {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  #header_btn, .order_btn {
+    padding: 8px;
+    font-size: 20px;
+  }
+
+  #banner_btn {
+    padding: 8px;
+    margin-top: 4px;
+  }
+
+  #main_banner {
+    padding-bottom: 25px;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  main {
+    padding-top: 60px;
+  }
+
+  #logo {
+    width: 130px;
+  }
+  #main_banner_title {
+    font-size: 30px;
+    line-height: 34px;
+  }
+
+  #main_banner_subtitle {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  #scientific_references {
+    padding: 16px 10px 22px 16px;
+  }
+
+  #banner_btn {
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  #header_btn {
+    font-size: 18px;
+  }
+  #logo {
+    width: 130px;
+  }
+  #main_banner_title {
+    font-size: 30px;
+    line-height: 34px;
+  }
+
+  #main_banner_subtitle {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  #banner_btn {
+    margin-top: 0;
+  }
+
+  #scientific_article_texts {
+    font-size: 16px;
+  }
+
+  #scientific_article_subtitle {
+    font-size: 18px;
+  }
+
+  #scientific_article_title {
+    font-size: 22px;
+  }
+
+
+}
+
+@media only screen and (max-width: 380px) {
+  #scientific_article_image {
+    width: 0;
+  }
+
+  #scientific_article_texts {
+    padding: 14px 10px;
+    width: 100%;
+  }
+
+  #scientific_article_references {
+    font-size: 10px;
+  }
+
+  #guarantee img {
+    max-width: 250px;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 10px;
+    width: 100vw;
+  }
+
+  main {
+    padding-top: 80px;
+  }
+
+  #logo {
+    width: 80px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  #scientific_article_image {
+    width: 0;
+  }
+
+  #scientific_article_texts {
+    padding: 14px 10px;
+    width: 100%;
+  }
+
+  #scientific_article_references {
+    font-size: 10px;
+  }
+
+  #guarantee img {
+    max-width: 250px;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 10px;
+    width: 100vw;
+  }
+
+  main {
+    padding-top: 80px;
+  }
+
+  #logo {
+    width: 80px;
+  }
+
+  .order_btn {
+    font-size: 16px;
+  }
+
+  #guarantee {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  #guarantee_texts {
+    font-size: 16px;
+  }
+
+  #guarantee_texts_titles{
+    font-size: 24px;
+  }
+
+  #main_banner {
+    padding-bottom: 14px;
+  }
+}
+
+

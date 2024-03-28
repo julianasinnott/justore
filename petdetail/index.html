@@ -1,0 +1,1233 @@
+<!DOCTYPE html><html lang="pt-PT"><head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let i;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",i=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")&&this._isValidScriptType(i)?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}_isValidScriptType(e){return!e||""===e||"string"==typeof e&&["text/javascript","text/x-javascript","text/ecmascript","text/jscript","application/javascript","application/x-javascript","application/ecmascript","application/jscript","module"].includes(e.toLowerCase())}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){const n=e[t];Object.defineProperty(e,t,{get:n||function(){},set:n=>{e["rocket"+t]=n}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let a=e.get(n);void 0===a&&(a=n.nextSibling,e.set(n,a));const o=document.createDocumentFragment();i.setStart(o,0),o.appendChild(i.createContextualFragment(t)),r.insertBefore(o,a)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mouseover","touchmove","touchstart","touchend","touchcancel","touchforcechange","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+	<meta charset="UTF-8">
+		<title>PetDetail – O spray que acaba com o mau hálito e o tártaro do seu pet</title>
+<meta name="robots" content="max-image-preview:large">
+<script type="rocketlazyloadscript" data-rocket-type="application/javascript">console.log('PixelYourSite Free version 9.4.1');</script>
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="PetDetail » Feed" href="https://petdetail.com.br/feed/">
+<link rel="alternate" type="application/rss+xml" title="PetDetail » Feed de comentários" href="https://petdetail.com.br/comments/feed/">
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="css/style.min_1.css" media="all">
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="secure-copy-content-protection-public-css" href="css/secure-copy-content-protection-public.css" media="all">
+<link rel="stylesheet" id="hello-elementor-css" href="css/style.min.css" media="all">
+<link rel="stylesheet" id="hello-elementor-theme-style-css" href="css/theme.min.css" media="all">
+<link rel="stylesheet" id="elementor-icons-css" href="css/elementor-icons.min.css" media="all">
+<link rel="stylesheet" id="elementor-frontend-legacy-css" href="css/frontend-legacy.min.css" media="all">
+<link rel="stylesheet" id="elementor-frontend-css" href="css/frontend.min.css" media="all">
+<link rel="stylesheet" id="swiper-css" href="css/swiper.min.css" media="all">
+<link rel="stylesheet" id="elementor-post-5-css" href="css/post-5.css" media="all">
+<link rel="stylesheet" id="elementor-pro-css" href="css/frontend.min_1.css" media="all">
+<link rel="stylesheet" id="elementor-global-css" href="css/global.css" media="all">
+<link rel="stylesheet" id="elementor-post-6-css" href="css/post-6.css" media="all">
+<link rel="stylesheet" id="google-fonts-1-css" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CMontserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;display=swap&amp;ver=6.4.3" media="all">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin=""><script type="rocketlazyloadscript" src="js/jquery.min.js" id="jquery-core-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/jquery-migrate.min.js" id="jquery-migrate-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/jquery.bind-first-0.2.3.min.js" id="jquery-bind-first-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/js.cookie-2.1.3.min.js" id="js-cookie-pys-js" defer=""></script>
+<script id="pys-js-extra">
+var pysOptions = {"staticEvents":[],"dynamicEvents":[],"triggerEvents":[],"triggerEventTypes":[],"debug":"","siteUrl":"https:\/\/petdetail.com.br","ajaxUrl":"https:\/\/petdetail.com.br\/wp-admin\/admin-ajax.php","ajax_event":"9df60b9174","enable_remove_download_url_param":"1","cookie_duration":"7","last_visit_duration":"60","enable_success_send_form":"","ajaxForServerEvent":"1","gdpr":{"ajax_enabled":false,"all_disabled_by_api":false,"facebook_disabled_by_api":false,"analytics_disabled_by_api":false,"google_ads_disabled_by_api":false,"pinterest_disabled_by_api":false,"bing_disabled_by_api":false,"externalID_disabled_by_api":false,"facebook_prior_consent_enabled":true,"analytics_prior_consent_enabled":true,"google_ads_prior_consent_enabled":null,"pinterest_prior_consent_enabled":true,"bing_prior_consent_enabled":true,"cookiebot_integration_enabled":false,"cookiebot_facebook_consent_category":"marketing","cookiebot_analytics_consent_category":"statistics","cookiebot_tiktok_consent_category":"marketing","cookiebot_google_ads_consent_category":null,"cookiebot_pinterest_consent_category":"marketing","cookiebot_bing_consent_category":"marketing","consent_magic_integration_enabled":false,"real_cookie_banner_integration_enabled":false,"cookie_notice_integration_enabled":false,"cookie_law_info_integration_enabled":false},"cookie":{"disabled_all_cookie":false,"disabled_advanced_form_data_cookie":false,"disabled_landing_page_cookie":false,"disabled_first_visit_cookie":false,"disabled_trafficsource_cookie":false,"disabled_utmTerms_cookie":false,"disabled_utmId_cookie":false},"woo":{"enabled":false},"edd":{"enabled":false}};
+</script>
+<script type="rocketlazyloadscript" src="js/public.js" id="pys-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://petdetail.com.br/wp-json/"><link rel="alternate" type="application/json" href="https://petdetail.com.br/wp-json/wp/v2/pages/6"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://petdetail.com.br/xmlrpc.php?rsd">
+<meta name="generator" content="WordPress 6.4.3">
+<link rel="canonical" href="https://petdetail.com.br/">
+<link rel="shortlink" href="https://petdetail.com.br/">
+<link rel="alternate" type="application/json+oembed" href="https://petdetail.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpetdetail.com.br%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://petdetail.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpetdetail.com.br%2F&amp;format=xml">
+<meta name="generator" content="Elementor 3.15.1; settings: css_print_method-external, google_font-enabled, font_display-auto">
+
+<link rel="icon" href="images/Petdetail-sem-fundo-site-150x150.png" sizes="32x32">
+<link rel="icon" href="images/Petdetail-sem-fundo-site.png" sizes="192x192">
+<link rel="apple-touch-icon" href="images/Petdetail-sem-fundo-site.png">
+<meta name="msapplication-TileImage" content="https://petdetail.com.br/wp-content/uploads/2022/10/Petdetail-sem-fundo-site.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '794683035360279');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=794683035360279&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body data-rsssl="1" class="home page-template page-template-elementor_canvas page page-id-6 wp-custom-logo elementor-default elementor-template-canvas elementor-kit-5 elementor-page elementor-page-6">
+			<div data-elementor-type="wp-post" data-elementor-id="6" class="elementor elementor-6">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+									<section class="elementor-section elementor-top-section elementor-element elementor-element-fca5b12 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="fca5b12" data-element_type="section" data-settings="{" background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-0f45ade" data-id="0f45ade" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-b83e27d elementor-widget elementor-widget-image" data-id="b83e27d" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="https://petdetail.com.br/">
+							<img fetchpriority="high" decoding="async" width="885" height="539" src="images/Petdetail-sem-fundo-site.png" class="attachment-full size-full wp-image-10" alt="" srcset="images/Petdetail-sem-fundo-site.png 885w, images/Petdetail-sem-fundo-site-300x183.png 300w, images/Petdetail-sem-fundo-site-768x468.png 768w" sizes="(max-width: 885px) 100vw, 885px">								</a>
+														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-a3513ec elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="a3513ec" data-element_type="section" data-settings="{" background_background":"classic"}"="">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-10f1526" data-id="10f1526" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-1cb6925 elementor-hidden-mobile elementor-widget elementor-widget-image" data-id="1cb6925" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img decoding="async" width="1080" height="1080" src="images/dogs-pet-site.png" class="attachment-full size-full wp-image-19" alt="" srcset="images/dogs-pet-site.png 1080w, images/dogs-pet-site-300x300.png 300w, images/dogs-pet-site-1024x1024.png 1024w, images/dogs-pet-site-150x150.png 150w, images/dogs-pet-site-768x768.png 768w" sizes="(max-width: 1080px) 100vw, 1080px">														</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-04013aa elementor-align-center elementor-hidden-mobile elementor-widget elementor-widget-button" data-id="04013aa" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a class="elementor-button elementor-button-link elementor-size-md elementor-animation-grow" href="#comprar">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">COMPRE AGORA</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-64929ba" data-id="64929ba" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-1c136d2 elementor-hidden-desktop elementor-widget elementor-widget-image" data-id="1c136d2" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img decoding="async" width="1080" height="1080" src="images/mobile-teste-1.png" class="attachment-full size-full wp-image-221" alt="" srcset="images/mobile-teste-1.png 1080w, images/mobile-teste-1-300x300.png 300w, images/mobile-teste-1-1024x1024.png 1024w, images/mobile-teste-1-150x150.png 150w, images/mobile-teste-1-768x768.png 768w" sizes="(max-width: 1080px) 100vw, 1080px">														</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-0e08308 elementor-hidden-mobile elementor-widget elementor-widget-image" data-id="0e08308" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="501" height="1029" src="images/anti-tartaro-pet-detail-sem-fundo.png" class="attachment-full size-full wp-image-32" alt="" srcset="images/anti-tartaro-pet-detail-sem-fundo.png 501w, images/anti-tartaro-pet-detail-sem-fundo-146x300.png 146w, images/anti-tartaro-pet-detail-sem-fundo-499x1024.png 499w" sizes="(max-width: 501px) 100vw, 501px">														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-178b6cc" data-id="178b6cc" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-a28fd82 elementor-widget elementor-widget-text-editor" data-id="a28fd82" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p><span style="color: #3c2c6c;"><strong>O SPRAY QUE ACABA COM O <span style="color: #fabe20;">MAU HÁLITO</span> E O <span style="color: #fabe20;">TÁRTARO</span> DO SEU PET</strong></span></p>					</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-66df359 elementor-widget elementor-widget-image" data-id="66df359" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="787" height="476" src="images/INTRODUCAO-PET-DETAIL.png" class="attachment-full size-full wp-image-77" alt="" srcset="images/INTRODUCAO-PET-DETAIL.png 787w, images/INTRODUCAO-PET-DETAIL-300x181.png 300w, images/INTRODUCAO-PET-DETAIL-768x465.png 768w" sizes="(max-width: 787px) 100vw, 787px">														</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-6a42f0c elementor-align-center elementor-hidden-desktop elementor-widget elementor-widget-button" data-id="6a42f0c" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a class="elementor-button elementor-button-link elementor-size-md elementor-animation-grow" href="#comprar">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">COMPRE AGORA</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-889f431 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="889f431" data-element_type="section" data-settings="{" background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-9b693cf" data-id="9b693cf" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-93cb97c elementor-widget elementor-widget-text-editor" data-id="93cb97c" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p>O tártaro é uma doença comum em cães e gatos, <span style="color: #fabe20;">causando perda dentária</span> e impedindo a alimentação do animal. Além disso, <span style="color: #fabe20;">as bactérias presentes no tártaro podem levar �&nbsp; morte.</span></p>					</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-e998689" data-id="e998689" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-41d7d03 elementor-widget elementor-widget-html" data-id="41d7d03" data-element_type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+			<div style="text-align: center;"><strong><img decoding="async" src="images/giphy.gif"></strong></div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-6885c71 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6885c71" data-element_type="section" data-settings="{" background_background":"classic"}"="">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-1606040" data-id="1606040" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-87602db elementor-widget elementor-widget-image" data-id="87602db" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="768" height="768" src="images/Petdetail-arte-04-04-768x768.png" class="attachment-medium_large size-medium_large wp-image-113" alt="" srcset="images/Petdetail-arte-04-04-768x768.png 768w, images/Petdetail-arte-04-04-300x300.png 300w, images/Petdetail-arte-04-04-1024x1024.png 1024w, images/Petdetail-arte-04-04-150x150.png 150w, images/Petdetail-arte-04-04.png 1200w" sizes="(max-width: 768px) 100vw, 768px">														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-22d903b" data-id="22d903b" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-06c07f6 elementor-widget elementor-widget-text-editor" data-id="06c07f6" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p><span style="color: #352a68;">O SPRAY QUE <span style="color: #f7cb32;">ACABA COM O TÁRTARO E MAU HÁLITO</span> DO SEU PET</span></p>					</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-1659e06 elementor-widget elementor-widget-image" data-id="1659e06" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="768" height="768" src="images/antes-e-depois-2-768x768.png" class="attachment-medium_large size-medium_large wp-image-111" alt="" srcset="images/antes-e-depois-2-768x768.png 768w, images/antes-e-depois-2-300x300.png 300w, images/antes-e-depois-2-1024x1024.png 1024w, images/antes-e-depois-2-150x150.png 150w, images/antes-e-depois-2.png 1200w" sizes="(max-width: 768px) 100vw, 768px">														</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-0af290b elementor-align-center elementor-widget elementor-widget-button" data-id="0af290b" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a class="elementor-button elementor-button-link elementor-size-md elementor-animation-grow" href="#comprar">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">COMPRE AGORA</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-79581a8 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="79581a8" data-element_type="section" data-settings="{" background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7b042a8" data-id="7b042a8" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-af57edf elementor-widget elementor-widget-menu-anchor" data-id="af57edf" data-element_type="widget" data-widget_type="menu-anchor.default">
+				<div class="elementor-widget-container">
+					<div id="comprar" class="elementor-menu-anchor"></div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-6a66b76 elementor-widget elementor-widget-text-editor" data-id="6a66b76" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p>ESCOLHA A MELHOR OFERTA PARA VOCÊ</p>					</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-0f9fa50 elementor-widget elementor-widget-text-editor" data-id="0f9fa50" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p><span style="color: #f7cb31;"><em>FRETE GRÁTIS SOMENTE HOJE!</em></span></p>					</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-98472d6 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="98472d6" data-element_type="section" data-settings="{" background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-db4e271" data-id="db4e271" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-5bd6c73 elementor-widget elementor-widget-image" data-id="5bd6c73" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="https://ev.braip.com/ref?pl=plavzepn&ck=che111jj&af=afidn5onx0">
+							<img loading="lazy" decoding="async" width="1080" height="1920" src="images/1-unidades-1920-1.png" class="attachment-full size-full wp-image-294" alt="" srcset="images/1-unidades-1920-1.png 1080w, images/1-unidades-1920-1-169x300.png 169w, images/1-unidades-1920-1-576x1024.png 576w, images/1-unidades-1920-1-768x1365.png 768w, images/1-unidades-1920-1-864x1536.png 864w" sizes="(max-width: 1080px) 100vw, 1080px">								</a>
+														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-a4e75d6" data-id="a4e75d6" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-2cbfc86 elementor-widget elementor-widget-image" data-id="2cbfc86" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="https://ev.braip.com/ref?pl=pla61rw1&ck=che111jj&af=afidn5onx0">
+							<img loading="lazy" decoding="async" width="576" height="1024" src="images/2-unidades-1920-2-576x1024.png" class="attachment-large size-large wp-image-292" alt="" srcset="images/2-unidades-1920-2-576x1024.png 576w, images/2-unidades-1920-2-169x300.png 169w, images/2-unidades-1920-2-768x1365.png 768w, images/2-unidades-1920-2-864x1536.png 864w, images/2-unidades-1920-2.png 1080w" sizes="(max-width: 576px) 100vw, 576px">								</a>
+														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-32bd78e" data-id="32bd78e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-0366e90 elementor-widget elementor-widget-image" data-id="0366e90" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="https://ev.braip.com/ref?pl=plapgr4w&ck=che111jj&af=afidn5onx0">
+							<img loading="lazy" decoding="async" width="576" height="1024" src="images/planos-petdetail-3-unidade-2-576x1024.png" class="attachment-large size-large wp-image-225" alt="" srcset="images/planos-petdetail-3-unidade-2-576x1024.png 576w, images/planos-petdetail-3-unidade-2-169x300.png 169w, images/planos-petdetail-3-unidade-2-768x1365.png 768w, images/planos-petdetail-3-unidade-2-864x1536.png 864w, images/planos-petdetail-3-unidade-2.png 1080w" sizes="(max-width: 576px) 100vw, 576px">								</a>
+														</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-6978f99 elementor-hidden-mobile elementor-widget elementor-widget-image" data-id="6978f99" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="1080" height="241" src="images/icones-pet-detail.png" class="attachment-full size-full wp-image-190" alt="" srcset="images/icones-pet-detail.png 1080w, images/icones-pet-detail-300x67.png 300w, images/icones-pet-detail-1024x229.png 1024w, images/icones-pet-detail-768x171.png 768w" sizes="(max-width: 1080px) 100vw, 1080px">														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-5e423d6" data-id="5e423d6" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-d5f273a elementor-widget elementor-widget-image" data-id="d5f273a" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="https://ev.braip.com/ref?pl=pla9wxk2&ck=che111jj&af=afidn5onx0">
+							<img loading="lazy" decoding="async" width="576" height="1024" src="images/planos-petdetail-5unidade-2-576x1024.png" class="attachment-large size-large wp-image-138" alt="" srcset="images/planos-petdetail-5unidade-2-576x1024.png 576w, images/planos-petdetail-5unidade-2-169x300.png 169w, images/planos-petdetail-5unidade-2-768x1365.png 768w, images/planos-petdetail-5unidade-2-864x1536.png 864w, images/planos-petdetail-5unidade-2.png 1080w" sizes="(max-width: 576px) 100vw, 576px">								</a>
+														</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-2632a54 elementor-hidden-desktop elementor-widget elementor-widget-image" data-id="2632a54" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="1080" height="241" src="images/icones-pet-detail.png" class="attachment-full size-full wp-image-190" alt="" srcset="images/icones-pet-detail.png 1080w, images/icones-pet-detail-300x67.png 300w, images/icones-pet-detail-1024x229.png 1024w, images/icones-pet-detail-768x171.png 768w" sizes="(max-width: 1080px) 100vw, 1080px">														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-712d7ae elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="712d7ae" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6eb4f15" data-id="6eb4f15" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-d251f9e elementor-widget elementor-widget-text-editor" data-id="d251f9e" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p><span style="color: #352a68;">TESTADO E APROVADO!</span></p>					</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-c270563 elementor-section-height-full elementor-section-boxed elementor-section-height-default elementor-section-items-middle" data-id="c270563" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-377c3b5" data-id="377c3b5" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-b3ad9e2 elementor-widget elementor-widget-image" data-id="b3ad9e2" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="1920" height="1488" src="images/Sem-Titulo-1-3.png" class="attachment-full size-full wp-image-172" alt="" srcset="images/Sem-Titulo-1-3.png 1920w, images/Sem-Titulo-1-3-300x233.png 300w, images/Sem-Titulo-1-3-1024x794.png 1024w, images/Sem-Titulo-1-3-768x595.png 768w, images/Sem-Titulo-1-3-1536x1190.png 1536w" sizes="(max-width: 1920px) 100vw, 1920px">														</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-392351e elementor-widget elementor-widget-image" data-id="392351e" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="800" height="620" src="images/Sem-Titulo-2-1-1024x794.png" class="attachment-large size-large wp-image-167" alt="" srcset="images/Sem-Titulo-2-1-1024x794.png 1024w, images/Sem-Titulo-2-1-300x233.png 300w, images/Sem-Titulo-2-1-768x595.png 768w, images/Sem-Titulo-2-1-1536x1190.png 1536w, images/Sem-Titulo-2-1.png 1920w" sizes="(max-width: 800px) 100vw, 800px">														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-ea76743" data-id="ea76743" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-3fffdc2 elementor-skin-coverflow elementor-arrows-yes elementor-pagination-type-bullets elementor-pagination-position-outside elementor-widget elementor-widget-media-carousel" data-id="3fffdc2" data-element_type="widget" data-settings="{" skin":"coverflow","slides_per_view":"1","slides_to_scroll_mobile":"1","show_arrows":"yes","pagination":"bullets","speed":500,"autoplay":"yes","autoplay_speed":5000,"loop":"yes","pause_on_hover":"yes","pause_on_interaction":"yes","space_between":{"unit":"px","size":10,"sizes":[]},"space_between_tablet":{"unit":"px","size":10,"sizes":[]},"space_between_mobile":{"unit":"px","size":10,"sizes":[]}}"="" data-widget_type="media-carousel.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-swiper">
+			<div class="elementor-main-swiper swiper-container">
+				<div class="swiper-wrapper">
+											<div class="swiper-slide">
+									<div class="elementor-carousel-image" style="background-image: url(images/prova-social-real.png)">
+					</div>
+								</div>
+											<div class="swiper-slide">
+									<div class="elementor-carousel-image" style="background-image: url(images/WhatsApp-Image-2023-02-27-at-05.19.35-2.jpeg)">
+					</div>
+								</div>
+											<div class="swiper-slide">
+									<div class="elementor-carousel-image" style="background-image: url(images/Sem-Titulo-3.png)">
+					</div>
+								</div>
+											<div class="swiper-slide">
+									<div class="elementor-carousel-image" style="background-image: url(images/WhatsApp-Image-2023-02-27-at-05.19.35-1-1.jpeg)">
+					</div>
+								</div>
+									</div>
+															<div class="swiper-pagination"></div>
+																<div class="elementor-swiper-button elementor-swiper-button-prev">
+							<i aria-hidden="true" class="eicon-chevron-left"></i>							<span class="elementor-screen-only">Previous</span>
+						</div>
+						<div class="elementor-swiper-button elementor-swiper-button-next">
+							<i aria-hidden="true" class="eicon-chevron-right"></i>							<span class="elementor-screen-only">Next</span>
+						</div>
+												</div>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-db1e9ce elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="db1e9ce" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-13136a2" data-id="13136a2" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-5ed2223 elementor-widget elementor-widget-text-editor" data-id="5ed2223" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p><span style="color: #352a68;">PERGUNTAS FREQUENTES</span></p>					</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-81616bc elementor-widget elementor-widget-toggle" data-id="81616bc" data-element_type="widget" data-widget_type="toggle.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-toggle">
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1351" class="elementor-tab-title" data-tab="1" role="button" aria-controls="elementor-tab-content-1351" aria-expanded="false">
+												<a class="elementor-toggle-title" tabindex="0">ELE SÓ PREVINE OU TRATA O TÁRTARO?</a>
+					</div>
+
+					<div id="elementor-tab-content-1351" class="elementor-tab-content elementor-clearfix" data-tab="1" role="region" aria-labelledby="elementor-tab-title-1351"><p>O anti tártaro PETDETAIL remove sim o tártaro progressivamente quando aplicado corretamente.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1352" class="elementor-tab-title" data-tab="2" role="button" aria-controls="elementor-tab-content-1352" aria-expanded="false">
+												<a class="elementor-toggle-title" tabindex="0">COMO USAR?</a>
+					</div>
+
+					<div id="elementor-tab-content-1352" class="elementor-tab-content elementor-clearfix" data-tab="2" role="region" aria-labelledby="elementor-tab-title-1352"><p>Aplique o spray pelo menos 3 vezes por semana nos dentes a noite. Para melhores resultados retira água e comida pelo menos 15 minutos antes da aplicação, potencializa a remoção dos tártaro.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1353" class="elementor-tab-title" data-tab="3" role="button" aria-controls="elementor-tab-content-1353" aria-expanded="false">
+												<a class="elementor-toggle-title" tabindex="0">POSSUI CONTRAINDICAÇÕES?</a>
+					</div>
+
+					<div id="elementor-tab-content-1353" class="elementor-tab-content elementor-clearfix" data-tab="3" role="region" aria-labelledby="elementor-tab-title-1353"><p>Não, todo pet pode usar, o produto é orgânico e 100% natural. Até filhotes podem usar.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1354" class="elementor-tab-title" data-tab="4" role="button" aria-controls="elementor-tab-content-1354" aria-expanded="false">
+												<a class="elementor-toggle-title" tabindex="0">QUANTO TEMPO LEVA PRA FAZER EFEITO?</a>
+					</div>
+
+					<div id="elementor-tab-content-1354" class="elementor-tab-content elementor-clearfix" data-tab="4" role="region" aria-labelledby="elementor-tab-title-1354"><p>O anti tártaro PETDETAIL ja mostra grandes resultados logo nas primeiras aplicações.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-1355" class="elementor-tab-title" data-tab="5" role="button" aria-controls="elementor-tab-content-1355" aria-expanded="false">
+												<a class="elementor-toggle-title" tabindex="0">ESSE SITE É SEGURO?</a>
+					</div>
+
+					<div id="elementor-tab-content-1355" class="elementor-tab-content elementor-clearfix" data-tab="5" role="region" aria-labelledby="elementor-tab-title-1355"><p>Muito seguro, com todas as suas informações sendo criptografadas assim que inseridas. Por isso, compre seu Petdetail aqui sem nenhum risco.</p></div>
+				</div>
+								</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-8c1a615 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="8c1a615" data-element_type="section" data-settings="{" background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-09b57b1" data-id="09b57b1" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-31355a5 elementor-widget elementor-widget-heading" data-id="31355a5" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-medium">Formas de pagamento</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-ce16f39 elementor-widget elementor-widget-image" data-id="ce16f39" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="140" height="43" src="images/pagamentoFooter.png" class="attachment-large size-large wp-image-204" alt="">														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-313ddd6" data-id="313ddd6" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-b82cf4e elementor-widget elementor-widget-heading" data-id="b82cf4e" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-medium">Métodos de entrega</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-caadbf2 elementor-widget elementor-widget-image" data-id="caadbf2" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img loading="lazy" decoding="async" width="125" height="52" src="images/correios.png" class="attachment-large size-large wp-image-205" alt="">														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-6da51ea" data-id="6da51ea" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-cd00d20 elementor-widget elementor-widget-heading" data-id="cd00d20" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-medium">RASTREIO</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-c5b66de elementor-align-center elementor-widget elementor-widget-button" data-id="c5b66de" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a class="elementor-button elementor-button-link elementor-size-sm" href="https://rastreamento.correios.com.br/app/index.php">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">RASTREIO</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-4760a55 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4760a55" data-element_type="section" data-settings="{" background_background":"classic"}"="">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2a51d3b" data-id="2a51d3b" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-59161b2 elementor-widget elementor-widget-text-editor" data-id="59161b2" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p><span style="color: #ffffff;">Copyright 2023© – PET DETAIL Todos os direitos reservados.</span></p>					</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+									</div>
+			</div>
+					</div>
+		<div id="ays_tooltip"><div id="ays_tooltip_block"></div></div>
+                    <style>
+                        #ays_tooltip,.ays_tooltip_class {
+                    		display: none;
+                    		position: absolute;
+    						z-index: 999999999;
+                            background-color: #ffffff;
+
+                            background-repeat: no-repeat;
+                            background-position: center center;
+                            background-size: cover;
+                            opacity:1;
+                            border: 1px solid #b7b7b7;
+                            border-radius: 3px;
+                            box-shadow: rgba(0,0,0,0) 0px 0px 15px  1px;
+                            color: #ff0000;
+                            padding: 5px;
+                            text-transform: none;
+							;
+                        }
+
+                        #ays_tooltip > *, .ays_tooltip_class > * {
+                            color: #ff0000;
+                            font-size: 12px;
+                        }
+
+                        #ays_tooltip_block {
+                            font-size: 12px;
+                            backdrop-filter: blur(0px);
+                        }
+
+                        @media screen and (max-width: 768px){
+                        	#ays_tooltip,.ays_tooltip_class {
+                        		font-size: 12px;
+                        	}
+                        	#ays_tooltip > *, .ays_tooltip_class > * {
+	                            font-size: 12px;
+	                        }
+                        }
+
+
+                    </style>
+                <style>
+                *:not(input):not(textarea)::selection {
+            background-color: transparent !important;
+            color: inherit !important;
+        }
+
+        *:not(input):not(textarea)::-moz-selection {
+            background-color: transparent !important;
+            color: inherit !important;
+        }
+
+            </style>
+    <script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+            function stopPrntScr() {
+                var inpFld = document.createElement("input");
+                inpFld.setAttribute("value", "Access Denied");
+                inpFld.setAttribute("width", "0");
+                inpFld.style.height = "0px";
+                inpFld.style.width = "0px";
+                inpFld.style.border = "0px";
+                document.body.appendChild(inpFld);
+                inpFld.select();
+                document.execCommand("copy");
+                inpFld.remove(inpFld);
+            }
+
+            (function ($) {
+                'use strict';
+                $(function () {
+                    let all = $('*').not('script, meta, link, style, noscript, title'),
+                        tooltip = $('#ays_tooltip'),
+                        tooltipClass = "mouse";
+                    if (tooltipClass == "mouse" || tooltipClass == "mouse_first_pos") {
+    	                                        $(document).on('mousemove', function (e) {
+                            let cordinate_x = e.pageX;
+                            let cordinate_y = e.pageY;
+                            let windowWidth = $(window).width();
+                            if (cordinate_y < tooltip.outerHeight()) {
+                                tooltip.css({'top': (cordinate_y + 10) + 'px'});
+                            } else {
+                                tooltip.css({'top': (cordinate_y - tooltip.outerHeight()) + 'px'});
+                            }
+                            if (cordinate_x > (windowWidth - tooltip.outerWidth())) {
+                                tooltip.css({'left': (cordinate_x - tooltip.outerWidth()) + 'px'});
+                            } else {
+                                tooltip.css({'left': (cordinate_x + 5) + 'px'});
+                            }
+
+                        });
+    	                                    } else {
+                        tooltip.addClass(tooltipClass);
+                    }
+    				                    $(window).on('keyup', function (e) {
+                        let keyCode = e.keyCode ? e.keyCode : e.which;
+                        if (keyCode == 44) {
+                            stopPrntScr();
+                            show_tooltip(1 );
+                            audio_play();
+                        }
+                    });
+
+
+    				                    $(document).on('contextmenu', function (e) {
+                        let target = $(event.target);
+                        if (!target.is("") && (!target.is("1") && !target.is("img")) ) {
+                            let t = e || window.event;
+                            let n = t.target || t.srcElement;
+                            if (n.nodeName !== "A") {
+                                show_tooltip(1 );
+                                audio_play();
+                            }
+                            return false;
+                        }
+                    });
+
+
+                                        $(document).on('contextmenu', function (e) {
+                        let target = $(event.target);
+                        if (target.is("img") || target.is("div.ays_tooltip_class")) {
+                            let t = e || window.event;
+                            let n = t.target || t.srcElement;
+                            if (n.nodeName !== "A") {
+                                show_tooltip(1 );
+                                audio_play();
+                            }
+                            return false;
+                        }
+                    });
+
+
+    				                    $(document).on('dragstart', function () {
+                        let target = $(event.target);
+                        if (!target.is("")) {
+                            show_tooltip(1 );
+                            audio_play();
+                            return false;
+                        }
+                    });
+
+
+                    $(window).on('keydown', function (event) {
+                        var sccp_selObj = window.getSelection();
+                        var check_selectors = true;
+                        if (!sccp_selObj.rangeCount < 1) {
+                            var sccp_selRange = sccp_selObj.getRangeAt(0);
+                            var sccp_selection_selector = sccp_selRange.startContainer.parentElement;
+                            check_selectors = !$(sccp_selection_selector).is("");
+                        }
+
+                        if (check_selectors) {
+                            var isOpera = (BrowserDetect.browser === "Opera");
+
+                            var isFirefox = (BrowserDetect.browser === 'Firefox');
+
+                            var isSafari = (BrowserDetect.browser === 'Safari');
+
+                            var isIE = (BrowserDetect.browser === 'Explorer');
+                            var isChrome = (BrowserDetect.browser === 'Chrome');
+                            var isMozilla = (BrowserDetect.browser === 'Mozilla');
+
+                            if (BrowserDetect.OS === 'Windows') {
+        						                                if (isChrome) {
+                                    if (((event.ctrlKey && event.shiftKey) && (
+                                        event.keyCode === 73 ||
+                                        event.keyCode === 74 ||
+                                        event.keyCode === 68 ||
+                                        event.keyCode === 67))) {
+                                        show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                    }
+                                }
+                                if (isFirefox) {
+                                    if (((event.ctrlKey && event.shiftKey) && (
+                                        event.keyCode === 73 ||
+                                        event.keyCode === 74 ||
+                                        event.keyCode === 67 ||
+                                        event.keyCode === 75 ||
+                                        event.keyCode === 69)) ||
+                                        event.keyCode === 118 ||
+                                        (event.keyCode === 112 && event.shiftKey) ||
+                                        (event.keyCode === 115 && event.shiftKey) ||
+                                        (event.keyCode === 118 && event.shiftKey) ||
+                                        (event.keyCode === 120 && event.shiftKey)) {
+                                        show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                    }
+                                }
+                                if (isOpera) {
+                                    if (((event.ctrlKey && event.shiftKey) && (
+                                        event.keyCode === 73 ||
+                                        event.keyCode === 74 ||
+                                        event.keyCode === 67 ||
+                                        event.keyCode === 88 ||
+                                        event.keyCode === 69))) {
+                                        show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                    }
+                                }
+                                if (isIE) {
+                                    if ((event.keyCode === 123 && event.shiftKey)) {
+                                        show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                    }
+                                }
+                                if (isMozilla) {
+                                    if ((event.ctrlKey && event.keyCode === 73) ||
+                                        (event.altKey && event.keyCode === 68)) {
+                                        show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                    }
+                                }
+
+        						                                if ((event.keyCode === 83 && event.ctrlKey)) {
+                                    show_tooltip(1);
+                                    audio_play();
+                                    return false;
+                                }
+
+        						                                if ((event.keyCode === 65 && event.ctrlKey)) {
+
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if (event.keyCode === 67 && event.ctrlKey && !event.shiftKey) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 86 && event.ctrlKey)) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 88 && event.ctrlKey)) {
+                                                                            show_tooltip(1 );
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 85 && event.ctrlKey)) {
+                                    show_tooltip(1 );
+                                    audio_play();
+                                    return false;
+                                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        						                                if (event.keyCode === 123 || (event.keyCode === 123 && event.shiftKey)) {
+                                    show_tooltip(1);
+                                    audio_play();
+                                    return false;
+                                }
+        						                            } else if (BrowserDetect.OS === 'Linux') {
+        						                                if (isChrome) {
+                                    if (
+                                        (
+                                            (event.ctrlKey && event.shiftKey) &&
+                                            (event.keyCode === 73 ||
+                                                event.keyCode === 74 ||
+                                                event.keyCode === 67
+                                            )
+                                        ) ||
+                                        (event.ctrlKey && event.keyCode === 85)
+                                    ) {
+                                        show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                    }
+                                }
+                                if (isFirefox) {
+                                    if (((event.ctrlKey && event.shiftKey) && (event.keyCode === 73 || event.keyCode === 74 || event.keyCode === 67 || event.keyCode === 75 || event.keyCode === 69)) || event.keyCode === 118 || event.keyCode === 116 || (event.keyCode === 112 && event.shiftKey) || (event.keyCode === 115 && event.shiftKey) || (event.keyCode === 118 && event.shiftKey) || (event.keyCode === 120 && event.shiftKey) || (event.keyCode === 85 && event.ctrlKey)) {
+                                        show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                    }
+                                }
+                                if (isOpera) {
+                                    if (((event.ctrlKey && event.shiftKey) && (event.keyCode === 73 || event.keyCode === 74 || event.keyCode === 67 || event.keyCode === 88 || event.keyCode === 69)) || (event.ctrlKey && event.keyCode === 85)) {
+                                        show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                    }
+                                }
+
+        						                                if ((event.keyCode === 83 && event.ctrlKey)) {
+                                    show_tooltip(1);
+                                    audio_play();
+                                    return false;
+                                }
+
+        						                                if (event.keyCode === 65 && event.ctrlKey) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if (event.keyCode === 67 && event.ctrlKey && !event.shiftKey) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 86 && event.ctrlKey)) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 88 && event.ctrlKey)) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 85 && event.ctrlKey)) {
+                                    show_tooltip(1 );
+                                    audio_play();
+                                    return false;
+                                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        						                                if (event.keyCode === 123 || (event.keyCode === 123 && event.shiftKey)) {
+                                    show_tooltip(1);
+                                    audio_play();
+                                    return false;
+                                }
+        						                            } else if (BrowserDetect.OS === 'Mac') {
+        						                                if (isChrome || isSafari || isOpera || isFirefox) {
+                                    if (event.metaKey && (
+                                        event.keyCode === 73 ||
+                                        event.keyCode === 74 ||
+                                        event.keyCode === 69 ||
+                                        event.keyCode === 75)) {
+                                        show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                    }
+                                }
+
+        						                                if ((event.keyCode === 83 && event.metaKey)) {
+                                    show_tooltip(1);
+                                    audio_play();
+                                    return false;
+                                }
+
+        						                                if ((event.keyCode === 65 && event.metaKey)) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 67 && event.metaKey)) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 86 && event.metaKey)) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 88 && event.metaKey)) {
+                                                                            show_tooltip(1);
+                                        audio_play();
+                                        return false;
+                                                                    }
+
+        						                                if ((event.keyCode === 85 && event.metaKey)) {
+                                    show_tooltip(1 );
+                                    audio_play();
+                                    return false;
+                                }
+
+
+
+
+
+
+
+
+
+
+
+
+        						                                if (event.keyCode === 123) {
+                                    show_tooltip(1);
+                                    audio_play();
+                                    return false;
+                                }
+        						                            }
+                        }
+                    });
+
+                    function disableSelection(e) {
+                        if (typeof e.onselectstart !== "undefined")
+                            e.onselectstart = function () {
+                                show_tooltip( );
+                                audio_play();
+                                return false
+                            };
+                        else if (typeof e.style.MozUserSelect !== "undefined")
+                            e.style.MozUserSelect = "none";
+                        else e.onmousedown = function () {
+                                show_tooltip();
+                                audio_play();
+                                return false
+                            };
+                        e.style.cursor = "default"
+                    }
+
+                    var msg_count = 1;
+                    function show_tooltip(mess) {
+                        if (mess && msg_count == 1) {
+                            if (tooltipClass == 'mouse_first_pos') {
+                                if ($('#ays_tooltip2').length > 0) {
+                                    $('#ays_tooltip2').remove();
+                                }
+                                var tooltip2 = tooltip.clone().prop('id','ays_tooltip2').insertBefore(tooltip);
+                                $('#ays_tooltip2').addClass('ays_tooltip_class');
+                                tooltip2.css({'display': 'table'});
+                                $('#ays_tooltip').fadeOut();
+                                setTimeout(function () {
+                                    tooltip2.remove();
+                                }, 1000);
+                            }else{
+                                tooltip.css({'display': 'table'});
+                                setTimeout(function () {
+                                    $('#ays_tooltip').fadeOut(500);
+                                }, 1000);
+                            }
+                        }
+
+                                            }
+
+                    function audio_play(audio) {
+                        if (audio) {
+                            var audio = document.getElementById("sccp_public_audio");
+                            if (audio) {
+                                audio.currentTime = 0;
+                                audio.play();
+                            }
+
+                        }
+                    }
+
+
+                });
+            })(jQuery);
+            var copyrightText = '';
+            var copyrightIncludeUrl = '';
+            var copyrightWord = '';
+
+            function copyToClipboard(text) {
+                var textarea = document.createElement("textarea");
+                textarea.textContent = text;
+                textarea.style.position = "fixed";
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    return document.execCommand("cut");
+                } catch (ex) {
+                    console.warn("Copy to clipboard failed.", ex);
+                    return false;
+                } finally {
+                    document.body.removeChild(textarea);
+                }
+            }
+
+            function htmlDecode(input) {
+              var doc = new DOMParser().parseFromString(input, "text/html");
+              return doc.documentElement.textContent;
+            }
+
+            var BrowserDetect = {
+                init: function () {
+                    this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+                    this.version = this.searchVersion(navigator.userAgent) || this.searchVersion(navigator.appVersion) || "an unknown version";
+                    this.OS = this.searchString(this.dataOS) || "an unknown OS";
+                },
+                searchString: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var dataString = data[i].string;
+                        var dataProp = data[i].prop;
+                        this.versionSearchString = data[i].versionSearch || data[i].identity;
+                        if (dataString) {
+                            if (dataString.indexOf(data[i].subString) !== -1) return data[i].identity;
+                        } else if (dataProp) return data[i].identity;
+                    }
+                },
+                searchVersion: function (dataString) {
+                    var index = dataString.indexOf(this.versionSearchString);
+                    if (index === -1) return;
+                    return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
+                },
+                dataBrowser: [{
+                    string: navigator.userAgent,
+                    subString: "Chrome",
+                    identity: "Chrome"
+                }, {
+                    string: navigator.userAgent,
+                    subString: "OmniWeb",
+                    versionSearch: "OmniWeb/",
+                    identity: "OmniWeb"
+                }, {
+                    string: navigator.vendor,
+                    subString: "Apple",
+                    identity: "Safari",
+                    versionSearch: "Version"
+                }, {
+                    prop: window.opera,
+                    identity: "Opera",
+                    versionSearch: "Version"
+                }, {
+                    string: navigator.vendor,
+                    subString: "iCab",
+                    identity: "iCab"
+                }, {
+                    string: navigator.vendor,
+                    subString: "KDE",
+                    identity: "Konqueror"
+                }, {
+                    string: navigator.userAgent,
+                    subString: "Firefox",
+                    identity: "Firefox"
+                }, {
+                    string: navigator.vendor,
+                    subString: "Camino",
+                    identity: "Camino"
+                }, { // for newer Netscapes (6+)
+                    string: navigator.userAgent,
+                    subString: "Netscape",
+                    identity: "Netscape"
+                }, {
+                    string: navigator.userAgent,
+                    subString: "MSIE",
+                    identity: "Explorer",
+                    versionSearch: "MSIE"
+                }, {
+                    string: navigator.userAgent,
+                    subString: "Gecko",
+                    identity: "Mozilla",
+                    versionSearch: "rv"
+                }, { // for older Netscapes (4-)
+                    string: navigator.userAgent,
+                    subString: "Mozilla",
+                    identity: "Netscape",
+                    versionSearch: "Mozilla"
+                }],
+                dataOS: [{
+                    string: navigator.platform,
+                    subString: "Win",
+                    identity: "Windows"
+                }, {
+                    string: navigator.platform,
+                    subString: "Mac",
+                    identity: "Mac"
+                }, {
+                    string: navigator.userAgent,
+                    subString: "iPhone",
+                    identity: "iPhone/iPod"
+                }, {
+                    string: navigator.platform,
+                    subString: "Linux",
+                    identity: "Linux"
+                }]
+            };
+            BrowserDetect.init();
+        // }, false);
+    });</script>
+<link rel="stylesheet" id="e-animations-css" href="css/animations.min.css" media="all">
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/petdetail.com.br","onHoverDelay":"100","rateThrottle":"3"};
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" src="js/imagesloaded.min.js" id="imagesloaded-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/webpack-pro.runtime.min.js" id="elementor-pro-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/webpack.runtime.min.js" id="elementor-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/frontend-modules.min.js" id="elementor-frontend-modules-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/wp-polyfill-inert.min.js" id="wp-polyfill-inert-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/regenerator-runtime.min.js" id="regenerator-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/wp-polyfill.min.js" id="wp-polyfill-js"></script>
+<script type="rocketlazyloadscript" src="js/hooks.min.js" id="wp-hooks-js"></script>
+<script type="rocketlazyloadscript" src="js/i18n.min.js" id="wp-i18n-js"></script>
+<script type="rocketlazyloadscript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type="rocketlazyloadscript" id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/petdetail.com.br\/wp-admin\/admin-ajax.php","nonce":"d048769b2a","urls":{"assets":"https:\/\/petdetail.com.br\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/petdetail.com.br\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"pt_PT","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/petdetail.com.br\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="rocketlazyloadscript" src="js/frontend.min.js" id="elementor-pro-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/waypoints.min.js" id="elementor-waypoints-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/core.min.js" id="jquery-ui-core-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/swiper.min.js" id="swiper-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/share-link.min.js" id="share-link-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/dialog.min.js" id="elementor-dialog-js" defer=""></script>
+<script type="rocketlazyloadscript" id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Partilhar no Facebook","shareOnTwitter":"Partilhar no Twitter","pinIt":"Fix\u00e1-lo","download":"Download","downloadImage":"Descarregar Imagem","fullscreen":"\u00c9cr\u00e3 Inteiro","zoom":"Zoom","share":"Partilhar","playVideo":"Reproduzir v\u00eddeo","previous":"Anterior","next":"Seguinte","close":"Fechar","a11yCarouselWrapperAriaLabel":"Carousel | Horizontal scrolling: Arrow Left & Right","a11yCarouselPrevSlideMessage":"Previous slide","a11yCarouselNextSlideMessage":"Next slide","a11yCarouselFirstSlideMessage":"This is the first slide","a11yCarouselLastSlideMessage":"This is the last slide","a11yCarouselPaginationBulletMessage":"Go to slide"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile ao alto","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile ao baixo","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Port\u00e1til","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},"version":"3.15.1","is_static":false,"experimentalFeatures":[],"urls":{"assets":"https:\/\/petdetail.com.br\/wp-content\/plugins\/elementor\/assets\/"},"swiperClass":"swiper-container","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":6,"title":"PetDetail%20%E2%80%93%20O%20spray%20que%20acaba%20com%20o%20mau%20h%C3%A1lito%20e%20o%20t%C3%A1rtaro%20do%20seu%20pet","excerpt":"","featuredImage":false}};
+</script>
+<script type="rocketlazyloadscript" src="js/frontend.min_1.js" id="elementor-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/preloaded-elements-handlers.min.js" id="pro-preloaded-elements-handlers-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/preloaded-modules.min.js" id="preloaded-modules-js" defer=""></script>
+<script type="rocketlazyloadscript" src="js/jquery.sticky.min.js" id="e-sticky-js" defer=""></script>
+
+
+
+</body></html><!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1711567924 -->
